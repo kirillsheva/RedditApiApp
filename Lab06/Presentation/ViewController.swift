@@ -28,7 +28,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
             
             let now = Int(NSDate().timeIntervalSince1970)
-                let difference = now - data.data[0].created_utc!
+                let difference = now - data.data[0].created_utc
                 var time:String
                 
                 switch difference{
@@ -44,13 +44,13 @@ class ViewController: UIViewController {
                     time = "\(Int(difference/31536000))y"
                 }
                 
-                self.authorL?.text = (data.data[0].author) ?? ""
+                self.authorL?.text = (data.data[0].author) 
                 self.timeL?.text = time
                 self.domainL?.text = data.data[0].domain
                 self.titleL?.text = data.data[0].title
-                self.ratingL?.text = String((data.data[0].ups ?? 0 )-(data.data[0].downs ?? 0 ))
-                self.numcommentsL?.text = String(data.data[0].num_comments ?? 0 )
-                self.imgView?.sd_setImage(with: URL(string:data.data[0].url ?? ""), placeholderImage: UIImage())
+                self.ratingL?.text = String((data.data[0].ups )-(data.data[0].downs ))
+                self.numcommentsL?.text = String(data.data[0].num_comments )
+                self.imgView?.sd_setImage(with: URL(string:data.data[0].url ), placeholderImage: UIImage())
             }
         })
     }

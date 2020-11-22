@@ -26,27 +26,28 @@ class UseCase{
     
     static func normalizeResponse(data: Response) -> SavedResponse{
         var res = SavedResponse(data: [])
+       
         for post in data.data.children{
-            var npost = SavedResponse.Post(author: nil, domain: nil,created_utc: nil, title: nil, url: nil, ups: nil, downs: nil, num_comments: nil, isSaved:false)
-            let mirror = Mirror(reflecting: post.data)
-            for rawProp in mirror.children{
-                switch rawProp.label {
+              let mirror = Mirror(reflecting: post.data)
+            var npost = SavedResponse.Post(author: "", domain: "",created_utc: 0, title: "", url: "", ups: 0, downs: 0, num_comments: 0,isSaved:false)
+            for info in mirror.children{
+                switch info.label {
                 case "author":
-                    npost.author = rawProp.value as? String
+                    npost.author = (info.value as? String)!
                 case "domain":
-                    npost.domain = rawProp.value as? String
+                    npost.domain = (info.value as? String)!
                 case "created_utc":
-                    npost.created_utc = rawProp.value as? Int
+                    npost.created_utc = (info.value as? Int)!
                 case "title":
-                    npost.title = rawProp.value as? String
+                    npost.title = (info.value as? String)!
                 case "url":
-                    npost.url = rawProp.value as? String
+                    npost.url = (info.value as? String)!
                 case "ups":
-                    npost.ups = rawProp.value as? Int
+                    npost.ups = (info.value as? Int)!
                 case "downs":
-                    npost.downs = rawProp.value as? Int
+                    npost.downs = (info.value as? Int)!
                 case "num_comments":
-                    npost.num_comments = rawProp.value as? Int
+                    npost.num_comments = (info.value as? Int)!
                 default:
                     print("Undefined")
                 }
@@ -54,22 +55,6 @@ class UseCase{
             res.data.append(npost)
         }
         return res
-    }
-    
-  
-    struct SavedResponse {
-        var data:[Post]
-        struct Post:Decodable{
-            var author:String?
-            var domain:String?
-            var created_utc:Int?
-            var title:String?
-            var url:String?
-            var ups:Int?
-            var downs:Int?
-            var num_comments:Int?
-            var isSaved:Bool
-        }
     }
 
 }

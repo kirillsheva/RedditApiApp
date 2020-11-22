@@ -23,12 +23,26 @@ struct Response : Decodable{
                 var ups:Int
                 var downs:Int
                 var num_comments:Int
+              
             }
         }
     }
 }
+struct SavedResponse {
+    var data:[Post]
+    struct Post:Decodable{
+        var author:String
+        var domain:String
+        var created_utc:Int
+        var title:String
+        var url:String
+        var ups:Int
+        var downs:Int
+        var num_comments:Int
+        var isSaved:Bool
+    }
+}
 class Repository{
-    
     static func parse(data:Data) -> Response?{
         do{
             let result = try JSONDecoder().decode(Response.self, from: data)
