@@ -14,9 +14,10 @@ class PersistenceManager {
         return instance
     }()
     
-    var cache:Data
+   var cache:Data
    
     private init(){
         cache = Data()
     }
 }
+

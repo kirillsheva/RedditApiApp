@@ -10,11 +10,13 @@ import Foundation
 
 class UseCase{
 
- static func getPostsInfo(subreddit: String,limit: Int?){
+    static func getPostsInfo(subreddit: String,limit: Int?,completion:@escaping (SavedResponse)->Void){
         Repository.getInfo(subreddit:subreddit,limit:limit, completion:{(success)->Void in
             if success{
                 if let res = Repository.parse(data: PersistenceManager.shared.cache){
-                    normalize(data: res)
+                  //  let result = normalizeResponse(data: res)
+                 //   normalize(data: result)
+                   completion(normalizeResponse(data: res))
             }
             }else {
                 print("Error")
@@ -22,33 +24,52 @@ class UseCase{
         })
 }
     
-static func normalize(data:Response){
-        var res = " "
-        var time:String
-  
-        for (index,post) in data.data.children.enumerated(){
-            let difference = Int(NSDate().timeIntervalSince1970) - post.data.created_utc
-            
-            switch difference{
-            case let t where t < 3600:
-                time = "\(Int(t/60))m"
-            case let t where t < 86400:
-                time = "\(Int(t/3600))h"
-            case let t where t < 2678400:
-                time = "\(Int(t/86400))d"
-            case let t where t < 31536000:
-                time = "\(Int(t/2678400))m"
-            default:
-                time = "\(Int(post.data.created_utc/31536000))y"
+    static func normalizeResponse(data: Response) -> SavedResponse{
+        var res = SavedResponse(data: [])
+        for post in data.data.children{
+            var npost = SavedResponse.Post(author: nil, domain: nil,created_utc: nil, title: nil, url: nil, ups: nil, downs: nil, num_comments: nil, isSaved:false)
+            let mirror = Mirror(reflecting: post.data)
+            for rawProp in mirror.children{
+                switch rawProp.label {
+                case "author":
+                    npost.author = rawProp.value as? String
+                case "domain":
+                    npost.domain = rawProp.value as? String
+                case "created_utc":
+                    npost.created_utc = rawProp.value as? Int
+                case "title":
+                    npost.title = rawProp.value as? String
+                case "url":
+                    npost.url = rawProp.value as? String
+                case "ups":
+                    npost.ups = rawProp.value as? Int
+                case "downs":
+                    npost.downs = rawProp.value as? Int
+                case "num_comments":
+                    npost.num_comments = rawProp.value as? Int
+                default:
+                    print("Undefined")
+                }
             }
-            res += "\n Username : \(post.data.author)"
-             res += "\n Time passed : \(time)"
-            res += "\n Domain : \(post.data.domain)"
-             res += "\n Title : \(post.data.title)"
-             res += "\n Image url : \(post.data.url)"
-            res += "\n Rating : \(post.data.ups - post.data.downs)"
-             res += "\n No of comments : \(post.data.num_comments)\n\n"
+            res.data.append(npost)
         }
-    print(res)
+        return res
     }
+    
+  
+    struct SavedResponse {
+        var data:[Post]
+        struct Post:Decodable{
+            var author:String?
+            var domain:String?
+            var created_utc:Int?
+            var title:String?
+            var url:String?
+            var ups:Int?
+            var downs:Int?
+            var num_comments:Int?
+            var isSaved:Bool
+        }
+    }
+
 }
