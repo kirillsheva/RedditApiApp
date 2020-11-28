@@ -13,6 +13,8 @@
 		CE7DE56C254F116D006346A0 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE56B254F116D006346A0 /* PersistenceManager.swift */; };
 		CE7DE56E254F117F006346A0 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE56D254F117F006346A0 /* UseCase.swift */; };
 		CE7DE571254F226A006346A0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE7DE570254F226A006346A0 /* SDWebImage */; };
+		CEC03AB1256D58080025C7C1 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC03AB0256D58080025C7C1 /* PostTableViewCell.swift */; };
+		CEC03AB3256D58210025C7C1 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC03AB2256D58210025C7C1 /* PostTableViewController.swift */; };
 		CEC0F89B254ED72200EF4887 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F89A254ED72200EF4887 /* AppDelegate.swift */; };
 		CEC0F89D254ED72200EF4887 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F89C254ED72200EF4887 /* SceneDelegate.swift */; };
 		CEC0F89F254ED72200EF4887 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F89E254ED72200EF4887 /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 		CE7DE569254F115E006346A0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		CE7DE56B254F116D006346A0 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		CE7DE56D254F117F006346A0 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		CEC03AB0256D58080025C7C1 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		CEC03AB2256D58210025C7C1 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 		CEC0F897254ED72200EF4887 /* Lab06.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lab06.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC0F89A254ED72200EF4887 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEC0F89C254ED72200EF4887 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 				CEC0F89E254ED72200EF4887 /* ViewController.swift */,
 				CEC0F8A5254ED72600EF4887 /* LaunchScreen.storyboard */,
 				CEC0F89C254ED72200EF4887 /* SceneDelegate.swift */,
+				CEC03AB0256D58080025C7C1 /* PostTableViewCell.swift */,
+				CEC03AB2256D58210025C7C1 /* PostTableViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -190,9 +196,11 @@
 				CE7DE56C254F116D006346A0 /* PersistenceManager.swift in Sources */,
 				CEC0F89F254ED72200EF4887 /* ViewController.swift in Sources */,
 				CE7DE566254F113F006346A0 /* HTTPService.swift in Sources */,
+				CEC03AB3256D58210025C7C1 /* PostTableViewController.swift in Sources */,
 				CEC0F89B254ED72200EF4887 /* AppDelegate.swift in Sources */,
 				CEC0F89D254ED72200EF4887 /* SceneDelegate.swift in Sources */,
 				CE7DE56A254F115E006346A0 /* Repository.swift in Sources */,
+				CEC03AB1256D58080025C7C1 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

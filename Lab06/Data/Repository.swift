@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct Response : Decodable{
+struct Response : Codable{
  var data : DataStruct
-    struct DataStruct : Decodable {
+    struct DataStruct : Codable {
         var children : [ItemStruct]
-        struct ItemStruct: Decodable {
+        struct ItemStruct: Codable {
             var data : ItemDataStruct
-            struct ItemDataStruct:Decodable{
+            struct ItemDataStruct:Codable{
                 var author:String
                 var domain:String
                 var created_utc:Int
@@ -28,20 +28,47 @@ struct Response : Decodable{
         }
     }
 }
-struct SavedResponse {
-    var data:[Post]
-    struct Post:Decodable{
-        var author:String
-        var domain:String
-        var created_utc:Int
-        var title:String
-        var url:String
-        var ups:Int
-        var downs:Int
-        var num_comments:Int
-        var isSaved:Bool
-    }
+
+struct Post:Codable{
+           var author:String
+           var domain:String
+           var created_utc:Int
+           var title:String
+           var url:String
+           var ups:Int
+           var downs:Int
+           var num_comments:Int
+           var isSaved:Bool
+        init(_ post: Response.DataStruct.ItemStruct.ItemDataStruct) {
+     
+         
+            
+            self.author = post.author
+            self.domain = post.domain
+            self.created_utc = (post.created_utc)
+            self.title = post.title
+            self.url = post.url
+            self.ups = post.ups
+            self.downs = post.downs
+            self.num_comments = (post.num_comments)
+            self.isSaved = false
+        }
+        
 }
+/*struct SavedResponse:Decodable {
+                  var data:[Post]
+                  struct Post:Decodable{
+                      var author:String
+                      var domain:String
+                      var created_utc:Int
+                      var title:String
+                      var url:String
+                      var ups:Int
+                      var downs:Int
+                      var num_comments:Int
+                      var isSaved:Bool
+                  }
+           }*/
 class Repository{
     static func parse(data:Data) -> Response?{
         do{
@@ -54,14 +81,8 @@ class Repository{
         
     }
     
-   static func getInfo(subreddit: String,limit: Int?, completion: @escaping (Bool) ->Void) {
-        HTTPService.requestService(subreddit: subreddit, listing: "top", limit: limit, after: nil,completion: {(success)-> Void in
-            if success{
-                completion(true)
-            }else{
-                print("Error")
-            }
-            })
+    func getData() -> Array<Post>{
+    PersistenceManager.shared.fetch()
     }
 }
 
