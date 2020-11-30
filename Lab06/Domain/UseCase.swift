@@ -8,18 +8,21 @@
 
 import Foundation
 let subreddit = "memes"
+let limit = 50
 class UseCase{
 
-    func request(){
-        HTTPService.requestService(subreddit: subreddit, listing: "top", limit: 5, after: nil)
+    func request() {
+        HTTPService.requestService(subreddit: subreddit, listing: "top", limit: limit, after: nil)
+     
     }
+    
   
     
     func getData() -> Array<Post>{
-        Repository().getData()
+        PersistenceManager.shared.getInfo()
     }
     
     func getSavedData() -> Array<Post>{
-        PersistenceManager.shared.fetchSaved()
+        PersistenceManager.shared.getSaved()
     }
 }

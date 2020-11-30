@@ -25,7 +25,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         saveB.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
+        saveB.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
+    
     }
     
   @IBAction func saveButton(_ sender: UIButton){
@@ -38,7 +39,7 @@ class ViewController: UIViewController {
     }
     }
     
-    func normalize(data: Post,position: Int){
+    func normalize(data: Post){
          DispatchQueue.main.async {
                    
                    let now = Int(NSDate().timeIntervalSince1970)

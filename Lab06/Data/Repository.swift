@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+
 struct Response : Codable{
  var data : DataStruct
     struct DataStruct : Codable {
@@ -39,10 +41,7 @@ struct Post:Codable{
            var downs:Int
            var num_comments:Int
            var isSaved:Bool
-        init(_ post: Response.DataStruct.ItemStruct.ItemDataStruct) {
-     
-         
-            
+    init(_ post: Response.DataStruct.ItemStruct.ItemDataStruct) {
             self.author = post.author
             self.domain = post.domain
             self.created_utc = (post.created_utc)
@@ -70,9 +69,9 @@ struct Post:Codable{
                   }
            }*/
 class Repository{
-    static func parse(data:Data) -> Response?{
+    static func parse(data:Data) -> Post?{
         do{
-            let result = try JSONDecoder().decode(Response.self, from: data)
+            let result = try JSONDecoder().decode(Post.self, from: data)
             return result
         } catch {
             print(error.localizedDescription)
@@ -81,8 +80,20 @@ class Repository{
         
     }
     
-    func getData() -> Array<Post>{
-    PersistenceManager.shared.fetch()
+    func saveToJsonFile(arr : Array<Post>) {
+     guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileUrl = directory.appendingPathComponent("Info.json")
+    
+            let data = try? JSONEncoder().encode(arr)
+        do{
+            try data!.write(to: fileUrl, options: [])
+            print("saved")
+
+        } catch{
+            print("Error")
+        }
+             
     }
+
 }
 

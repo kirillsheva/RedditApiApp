@@ -31,17 +31,16 @@ class HTTPService{
     static func requestService(subreddit: String,listing: String, limit: Int?, after: String?){
                 HTTPRequester.request(url: buildLink(subreddit: subreddit, listing: listing, limit: limit, after: after), completionHandler:{ data in
             if let data = data{
-            if let info:Response = try? JSONDecoder().decode(Response.self, from: data){
+            if let info = try? JSONDecoder().decode(Response.self, from: data){
                 for element in info.data.children{
                     PersistenceManager.shared.add(post: Post(element.data))
-                        
+                    
                 }
                 
                     NotificationCenter.default.post(Notification(name: notify))
                 }
-           
+                
               else{
-        
                 print("Error")
             }
                 

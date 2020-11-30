@@ -37,7 +37,7 @@ class PostTableViewCell: UITableViewCell {
   
     
     func configure(for data: Post){
-      
+    
         let now = Int(NSDate().timeIntervalSince1970)
         let difference = now - data.created_utc
                             var time:String
@@ -65,6 +65,6 @@ class PostTableViewCell: UITableViewCell {
        
         
     }
- 
+    
     
 }

@@ -9,9 +9,13 @@
 import Foundation
 
 class PersistenceManager {
-    static let shared = PersistenceManager ()
+    static var shared :  PersistenceManager = {
+        let instance = PersistenceManager()
+        return instance
+    }()
     
     private init() {}
+    
     var saved:Array<Post> = []
     var info:Array<Post> = []
 
@@ -22,36 +26,58 @@ class PersistenceManager {
     }
     
     func remove(title:String){
-        for element in (0...saved.count - 1){
+        for element in (0..<saved.count){
             if saved[element].title == title{
                 saved[element].isSaved = false
                saved.remove(at: element)
+       
                 print("remove")
             }
         }
+     savePosts(resp: saved)
+         NotificationCenter.default.post(Notification(name: notify))
+        
     }
     
 func save (title:String){
-    for element in (0...info.count - 1){
+    for element in (0..<info.count){
         if info[element].title == title {
-            info[element].isSaved = !info[element].isSaved
+            info[element].isSaved = true
             saved.append(info[element])
+     
+          
+            
           //  print(saved[element])
-            print("add")
+
         }
+        
     }
+   // print(getDirectory() )
+     savePosts(resp: saved)
+    print(saved)
     NotificationCenter.default.post(Notification(name: notify))
 }
     
-    func fetch()-> Array<Post>{
+    func getInfo()-> Array<Post>{
         return info
     }
-    func fetchSaved()->Array<Post>{
+    func getSaved()->Array<Post>{
         return saved
     }
     
     
-}
+    func getDirectory() -> URL{
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+                return directory!
+    }
+    
+    func savePosts(resp: Array<Post>){
+             Repository().saveToJsonFile(arr:resp)
+     
+        }
+    }
+    
+
 
 
 

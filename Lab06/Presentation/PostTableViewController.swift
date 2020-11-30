@@ -9,63 +9,76 @@
 import UIKit
 
 let notify = Notification.Name("123")
-private let toNextScreenIdentifier = "toNextScreen"
+ let toNextScreenIdentifier = "toNextScreen"
+var val = 5
 
 class PostTableViewController: UITableViewController {
-    let use: UseCase = UseCase()
+
     var posts: Array<Post> = []
     var savedPosts: Array<Post> = []
-
-    var filter : UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+  
+    var filter: UIButton = UIButton()
     
     override func viewDidLoad() {
-            super.viewDidLoad()
+        UseCase().request()
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         self.title = "/r/\(subreddit)"
-    //    self.navigationController?.navigationBar.prefersLargeTitles = true
+        //    self.navigationController?.navigationBar.prefersLargeTitles = true
         self.filter.setImage(UIImage(systemName: "bookmark"), for: .normal)
         self.filter.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
-        self.filter.tintColor = UIColor.green
         self.filter.addTarget(self, action: #selector(self.showsub), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.filter)
-        NotificationCenter.default.addObserver(self, selector: #selector(update), name: notify, object: nil)
-       
-        if posts.count == 0 {
-            use.request()
-           
-           
-        }
-       
+          self.filter.tintColor = UIColor.systemGreen
+        //   print(PersistenceManager.shared.getDirectory())
+      //  print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
+       NotificationCenter.default.addObserver(self, selector: #selector(loadPosts), name: notify, object: nil)
     }
     
-    
-      @objc
-    func updatePostNotification(){
-    update()
-      }
     
     @objc
     func showsub(){
         filter.isSelected = !filter.isSelected
-        updateSaved()
+        loadSaved()
     }
-    
-    func updateSaved(){
-    
-        let saved = use.getSavedData()
-     
-        savedPosts = saved
-       
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+  
+    func loadSaved(){
+        if let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Info.json"){
+   //         let items = try FileManager.default.contentsOfDirectory(atPath: path)
+            if  let data = try? Data(contentsOf: path, options: .alwaysMapped){
+                        do{
+                            savedPosts = try JSONDecoder().decode([Post].self, from: data)
+                            print(savedPosts)
+                                    tableView.reloadData()
+                            
+                        } catch {
+                            print(error)
+            }
+                
+            
         }
+            }
+
+
     }
+        
+        
+    
+    
     @objc
-    func update(){
-        let post = use.getData()
-        posts = post
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+    func loadPosts(){
+        let post = UseCase().getData()
+        var i = 0
+        while i < val {
+            posts.append(post[i])
+            i+=1
         }
+        DispatchQueue.main.async {
+          
+            self.tableView.reloadData()
+        
+    }
     }
     // MARK: - Table view data source
 
@@ -77,10 +90,11 @@ class PostTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if filter.isSelected{
-            return self.savedPosts.count
+            return savedPosts.count
         }
         else{
-        return self.posts.count
+        return posts.count
+            
         }
     }
 
@@ -88,9 +102,9 @@ class PostTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath) as! PostTableViewCell
         if filter.isSelected{
-            cell.configure(for: self.savedPosts[indexPath.row])
+            cell.configure(for: savedPosts[indexPath.row])
         } else{
-        cell.configure(for: self.posts[indexPath.row] )
+        cell.configure(for: posts[indexPath.row] )
         }
         return cell
     }
@@ -98,12 +112,30 @@ class PostTableViewController: UITableViewController {
 
     
     // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: toNextScreenIdentifier, sender: indexPath)
     }
+ 
     
-
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == posts.count - 1 {
+              let post = UseCase().getData()
+            if posts.count < limit {
+                var i = posts.count
+                val+=5
+                      while i < val {
+                          posts.append(post[i])
+                          i+=1
+                      }
+                self.perform(#selector(loadTable),with: nil,afterDelay: 1.0)
+            }
+        }
+    }
+    
+    @objc func loadTable(){
+        self.tableView.reloadData()
+    }
     /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -135,16 +167,23 @@ class PostTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier{
-        case toNextScreenIdentifier:
-            if let indexPath = (sender as? IndexPath)?.row{
-                let a = segue.destination as! ViewController
-                a.normalize(data: posts[indexPath], position: indexPath)
+ 
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      switch segue.identifier{
+      case toNextScreenIdentifier:
+        if let indexPath = (sender as? IndexPath)?.row{
+                let info = segue.destination as! ViewController
+            if (filter.isSelected){
+                info.normalize(data: savedPosts[indexPath])
+            } else{
+            info.normalize(data: posts[indexPath])
             }
-        default:()
+           // }
+      
         }
+      default:()
     }
     
-
+    }
 }
+
