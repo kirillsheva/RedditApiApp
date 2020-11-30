@@ -26,7 +26,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         saveB.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.imgView.addGestureRecognizer(tapGestureRecognizer)
+    }
     
+    @objc
+    func handleTap(){
+        print("TAPPP")
     }
     
   @IBAction func saveButton(_ sender: UIButton){
