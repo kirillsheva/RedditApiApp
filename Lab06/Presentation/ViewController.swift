@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class ViewController: UIViewController {
-    
+    var id:String = ""
     @IBOutlet weak var authorL:UILabel!
      @IBOutlet weak var timeL:UILabel!
      @IBOutlet weak var domainL:UILabel!
@@ -32,10 +32,10 @@ class ViewController: UIViewController {
   @IBAction func saveButton(_ sender: UIButton){
     sender.isSelected = !sender.isSelected
     if(sender.isSelected){
-    PersistenceManager.shared.save(title: titleL.text!)
+        PersistenceManager.shared.save(id: id)
     }
     if(!sender.isSelected){
-         PersistenceManager.shared.remove(title: titleL.text!)        
+         PersistenceManager.shared.remove(id: id)
     }
     }
     
@@ -58,6 +58,7 @@ class ViewController: UIViewController {
                                     default:
                                         time = "\(Int(difference/31536000))y"
                                     }
+            self.id = data.id
                        self.authorL?.text = (data.author)
             self.timeL?.text = time
                        self.domainL?.text = data.domain

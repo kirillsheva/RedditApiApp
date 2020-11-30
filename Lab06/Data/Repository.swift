@@ -17,6 +17,7 @@ struct Response : Codable{
         struct ItemStruct: Codable {
             var data : ItemDataStruct
             struct ItemDataStruct:Codable{
+                var id:String
                 var author:String
                 var domain:String
                 var created_utc:Int
@@ -32,6 +33,7 @@ struct Response : Codable{
 }
 
 struct Post:Codable{
+    var id:String
            var author:String
            var domain:String
            var created_utc:Int
@@ -42,6 +44,7 @@ struct Post:Codable{
            var num_comments:Int
            var isSaved:Bool
     init(_ post: Response.DataStruct.ItemStruct.ItemDataStruct) {
+        self.id=post.id
             self.author = post.author
             self.domain = post.domain
             self.created_utc = (post.created_utc)

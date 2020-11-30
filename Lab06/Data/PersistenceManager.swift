@@ -25,9 +25,9 @@ class PersistenceManager {
      //   print(PersistenceManager.shared.fetch())
     }
     
-    func remove(title:String){
+    func remove(id:String){
         for element in (0..<saved.count){
-            if saved[element].title == title{
+            if saved[element].id == id{
                 saved[element].isSaved = false
                saved.remove(at: element)
        
@@ -39,9 +39,9 @@ class PersistenceManager {
         
     }
     
-func save (title:String){
+func save (id:String){
     for element in (0..<info.count){
-        if info[element].title == title {
+        if info[element].id == id {
             info[element].isSaved = true
             saved.append(info[element])
      
