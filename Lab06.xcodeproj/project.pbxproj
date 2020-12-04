@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE72A526257ABA8D002E6288 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72A525257ABA8D002E6288 /* CommentService.swift */; };
 		CE7DE566254F113F006346A0 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE565254F113F006346A0 /* HTTPService.swift */; };
 		CE7DE568254F114E006346A0 /* HTTPRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE567254F114E006346A0 /* HTTPRequester.swift */; };
 		CE7DE56A254F115E006346A0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE569254F115E006346A0 /* Repository.swift */; };
 		CE7DE56C254F116D006346A0 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE56B254F116D006346A0 /* PersistenceManager.swift */; };
 		CE7DE56E254F117F006346A0 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE56D254F117F006346A0 /* UseCase.swift */; };
-		CE7DE571254F226A006346A0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE7DE570254F226A006346A0 /* SDWebImage */; };
 		CEC03AB1256D58080025C7C1 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC03AB0256D58080025C7C1 /* PostTableViewCell.swift */; };
 		CEC03AB3256D58210025C7C1 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC03AB2256D58210025C7C1 /* PostTableViewController.swift */; };
 		CEC0F89B254ED72200EF4887 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F89A254ED72200EF4887 /* AppDelegate.swift */; };
@@ -21,9 +21,11 @@
 		CEC0F8A2254ED72200EF4887 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC0F8A0254ED72200EF4887 /* Main.storyboard */; };
 		CEC0F8A4254ED72600EF4887 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEC0F8A3254ED72600EF4887 /* Assets.xcassets */; };
 		CEC0F8A7254ED72600EF4887 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC0F8A5254ED72600EF4887 /* LaunchScreen.storyboard */; };
+		CEC7CCE42575C16200AB7248 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CEC7CCE32575C16200AB7248 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE72A525257ABA8D002E6288 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		CE7DE565254F113F006346A0 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		CE7DE567254F114E006346A0 /* HTTPRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequester.swift; sourceTree = "<group>"; };
 		CE7DE569254F115E006346A0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -46,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE7DE571254F226A006346A0 /* SDWebImage in Frameworks */,
+				CEC7CCE42575C16200AB7248 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +70,7 @@
 				CE7DE567254F114E006346A0 /* HTTPRequester.swift */,
 				CE7DE569254F115E006346A0 /* Repository.swift */,
 				CE7DE56B254F116D006346A0 /* PersistenceManager.swift */,
+				CE72A525257ABA8D002E6288 /* CommentService.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -131,7 +134,7 @@
 			);
 			name = Lab06;
 			packageProductDependencies = (
-				CE7DE570254F226A006346A0 /* SDWebImage */,
+				CEC7CCE32575C16200AB7248 /* SDWebImage */,
 			);
 			productName = Lab06;
 			productReference = CEC0F897254ED72200EF4887 /* Lab06.app */;
@@ -143,7 +146,6 @@
 		CEC0F88F254ED72200EF4887 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = NO;
 				KnownAssetTags = (
 					New,
 				);
@@ -166,7 +168,7 @@
 			);
 			mainGroup = CEC0F88E254ED72200EF4887;
 			packageReferences = (
-				CE7DE56F254F226A006346A0 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				CEC7CCE22575C16200AB7248 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = CEC0F898254ED72200EF4887 /* Products */;
 			projectDirPath = "";
@@ -203,6 +205,7 @@
 				CEC03AB3256D58210025C7C1 /* PostTableViewController.swift in Sources */,
 				CEC0F89B254ED72200EF4887 /* AppDelegate.swift in Sources */,
 				CEC0F89D254ED72200EF4887 /* SceneDelegate.swift in Sources */,
+				CE72A526257ABA8D002E6288 /* CommentService.swift in Sources */,
 				CE7DE56A254F115E006346A0 /* Repository.swift in Sources */,
 				CEC03AB1256D58080025C7C1 /* PostTableViewCell.swift in Sources */,
 			);
@@ -403,20 +406,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE7DE56F254F226A006346A0 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		CEC7CCE22575C16200AB7248 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.4;
+				minimumVersion = 5.10.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE7DE570254F226A006346A0 /* SDWebImage */ = {
+		CEC7CCE32575C16200AB7248 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE7DE56F254F226A006346A0 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = CEC7CCE22575C16200AB7248 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */

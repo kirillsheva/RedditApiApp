@@ -26,10 +26,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgw-ym-Z0J">
-                                            <rect key="frame" x="20" y="11" width="143" height="21"/>
+                                            <rect key="frame" x="4" y="11" width="143" height="21"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="143" id="4So-N5-qP2"/>
                                                 <constraint firstAttribute="width" constant="143" id="NDL-RN-rlD"/>
                                                 <constraint firstAttribute="height" constant="21" id="Zx9-mn-tct"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="dBK-Gd-Kzt"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -83,6 +85,9 @@
                                             <state key="normal" title="Share" image="arrow.turn.right.up" catalog="system">
                                                 <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </state>
+                                            <connections>
+                                                <action selector="share:" destination="iYv-yw-UAR" eventType="touchUpInside" id="wUR-7j-ckf"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvB-EZ-lfE">
                                             <rect key="frame" x="11" y="270" width="17" height="22"/>
@@ -120,6 +125,7 @@
                                         <constraint firstItem="k3m-ec-ees" firstAttribute="top" secondItem="FXW-kZ-7fd" secondAttribute="bottom" constant="17" id="1FL-KX-TI8"/>
                                         <constraint firstAttribute="trailing" secondItem="uHZ-bd-708" secondAttribute="trailing" id="4zr-e5-bmS"/>
                                         <constraint firstItem="FXW-kZ-7fd" firstAttribute="leading" secondItem="6yu-Qk-3g0" secondAttribute="leading" id="ASc-ns-m8a"/>
+                                        <constraint firstItem="fgw-ym-Z0J" firstAttribute="top" secondItem="6yu-Qk-3g0" secondAttribute="top" constant="11" id="Ac7-kC-wYX"/>
                                         <constraint firstItem="hYk-rh-p1h" firstAttribute="top" secondItem="FXW-kZ-7fd" secondAttribute="bottom" constant="18" id="BKa-1u-KPo"/>
                                         <constraint firstItem="wv5-ap-3Sj" firstAttribute="leading" secondItem="S7l-2c-XaF" secondAttribute="trailing" constant="14" id="DAI-4D-B8W"/>
                                         <constraint firstItem="uHZ-bd-708" firstAttribute="top" secondItem="fgw-ym-Z0J" secondAttribute="bottom" constant="8" id="DHe-FV-1pJ"/>
@@ -131,11 +137,11 @@
                                         <constraint firstItem="FXW-kZ-7fd" firstAttribute="top" secondItem="uHZ-bd-708" secondAttribute="bottom" constant="8" id="Wts-Iv-9Rq"/>
                                         <constraint firstItem="uHZ-bd-708" firstAttribute="leading" secondItem="6yu-Qk-3g0" secondAttribute="leading" id="XDM-AH-zZw"/>
                                         <constraint firstItem="uHZ-bd-708" firstAttribute="top" secondItem="wv5-ap-3Sj" secondAttribute="bottom" constant="8" id="Xg3-ER-cWc"/>
+                                        <constraint firstItem="fgw-ym-Z0J" firstAttribute="leading" secondItem="6yu-Qk-3g0" secondAttribute="leading" constant="4" id="XrN-JG-3Kq"/>
                                         <constraint firstItem="hYk-rh-p1h" firstAttribute="firstBaseline" secondItem="lS4-A8-DM2" secondAttribute="firstBaseline" id="Yrk-fQ-zMh"/>
                                         <constraint firstItem="S7l-2c-XaF" firstAttribute="centerX" secondItem="uHZ-bd-708" secondAttribute="centerX" id="eUH-jR-AfQ"/>
                                         <constraint firstItem="hYk-rh-p1h" firstAttribute="centerY" secondItem="lS4-A8-DM2" secondAttribute="centerY" id="ewT-ib-Aaz"/>
                                         <constraint firstItem="lS4-A8-DM2" firstAttribute="leading" secondItem="hz0-Ik-hvZ" secondAttribute="trailing" constant="15" id="gAk-MC-5bI"/>
-                                        <constraint firstItem="fgw-ym-Z0J" firstAttribute="top" secondItem="6yu-Qk-3g0" secondAttribute="top" constant="11" id="gta-3e-0RG"/>
                                         <constraint firstAttribute="trailing" secondItem="k3m-ec-ees" secondAttribute="trailing" constant="8" id="hkR-8w-h7l"/>
                                         <constraint firstItem="hYk-rh-p1h" firstAttribute="firstBaseline" secondItem="DvB-EZ-lfE" secondAttribute="baseline" id="iAz-AS-oMB"/>
                                         <constraint firstItem="hz0-Ik-hvZ" firstAttribute="leading" secondItem="hYk-rh-p1h" secondAttribute="trailing" constant="88" id="kw0-y9-cG4"/>
@@ -146,7 +152,6 @@
                                         <constraint firstItem="hYk-rh-p1h" firstAttribute="top" secondItem="hz0-Ik-hvZ" secondAttribute="top" id="sR1-OG-JvE"/>
                                         <constraint firstItem="hYk-rh-p1h" firstAttribute="firstBaseline" secondItem="k3m-ec-ees" secondAttribute="firstBaseline" id="tOq-aR-3xB"/>
                                         <constraint firstAttribute="trailing" secondItem="FXW-kZ-7fd" secondAttribute="trailing" id="v5d-HS-93r"/>
-                                        <constraint firstItem="fgw-ym-Z0J" firstAttribute="leading" secondItem="6yu-Qk-3g0" secondAttribute="leading" constant="20" id="yhs-hK-Q5q"/>
                                         <constraint firstItem="uHZ-bd-708" firstAttribute="top" secondItem="fgw-ym-Z0J" secondAttribute="bottom" constant="8" id="zUt-UK-CgH"/>
                                         <constraint firstItem="S7l-2c-XaF" firstAttribute="top" secondItem="6yu-Qk-3g0" secondAttribute="topMargin" id="zzd-xz-agw"/>
                                     </constraints>
@@ -227,6 +232,9 @@
                                         <state key="normal" title="Share" image="arrow.turn.right.up" catalog="system">
                                             <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lA7-oI-6dN"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="867-Sg-Nil">
                                         <rect key="frame" x="8" y="9" width="145" height="21"/>

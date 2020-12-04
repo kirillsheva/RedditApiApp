@@ -11,6 +11,7 @@ import SDWebImage
 
 class ViewController: UIViewController {
     var id:String = ""
+    var permalink: String = ""
     @IBOutlet weak var authorL:UILabel!
      @IBOutlet weak var timeL:UILabel!
      @IBOutlet weak var domainL:UILabel!
@@ -27,12 +28,24 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         saveB.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        self.imgView.addGestureRecognizer(tapGestureRecognizer)
+        imgView.isUserInteractionEnabled = true
+        tapGestureRecognizer.numberOfTapsRequired = 2
+        imgView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    @IBAction func share(_ sender: UIButton) {
+        let link = "https://www.reddit.com/\(permalink)"
+             
+             let linkToShare = [link]
+             let activityViewController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
+          //   activityViewController.popoverPresentationController?.sourceView = self.view
+             self.present(activityViewController,animated: true,completion: nil)
+        
+    }
     @objc
     func handleTap(){
-        print("TAPPP")
+        PersistenceManager.shared.save(id: id)
+
     }
     
   @IBAction func saveButton(_ sender: UIButton){
@@ -64,6 +77,7 @@ class ViewController: UIViewController {
                                     default:
                                         time = "\(Int(difference/31536000))y"
                                     }
+            self.permalink = data.permalink
             self.id = data.id
                        self.authorL?.text = (data.author)
             self.timeL?.text = time

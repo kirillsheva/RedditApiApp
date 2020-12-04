@@ -26,11 +26,32 @@ struct Response : Codable{
                 var ups:Int
                 var downs:Int
                 var num_comments:Int
-              
+                var permalink: String
             }
         }
     }
 }
+
+struct Comments : Codable{
+    var data: PostComments
+    struct PostComments : Codable {
+        var children : [Child]
+        struct Child : Codable {
+            var data: Post
+            struct Post : Codable {
+                var title: String
+                var permalink : String
+                var author : String
+                var created_utc:Int
+                var body : String
+                var ups : Int
+                var downs : Int
+            }
+        }
+    }
+}
+
+
 
 struct Post:Codable{
     var id:String
@@ -43,6 +64,7 @@ struct Post:Codable{
            var downs:Int
            var num_comments:Int
            var isSaved:Bool
+            var permalink:String
     init(_ post: Response.DataStruct.ItemStruct.ItemDataStruct) {
         self.id=post.id
             self.author = post.author
@@ -54,6 +76,7 @@ struct Post:Codable{
             self.downs = post.downs
             self.num_comments = (post.num_comments)
             self.isSaved = false
+        self.permalink = post.permalink
         }
         
 }

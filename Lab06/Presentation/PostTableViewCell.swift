@@ -12,7 +12,7 @@ class PostTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "postCell"
     
-    
+   var id:String = ""
     @IBOutlet weak var authorL:UILabel!
      @IBOutlet weak var timeL:UILabel!
      @IBOutlet weak var domainL:UILabel!
@@ -21,6 +21,8 @@ class PostTableViewCell: UITableViewCell {
      @IBOutlet weak var titleL:UITextView!
      @IBOutlet weak var shareL:UIButton!
     @IBOutlet weak var imgView:UIImageView!
+    
+    
     
     override func prepareForReuse() {
         self.authorL.text = nil
@@ -32,13 +34,26 @@ class PostTableViewCell: UITableViewCell {
         self.imgView.image = nil
      
     }
-    
-    
-  
-    
+      @objc
+      func handleTap(){
+         print("AYE")
+
+      }
+    @IBAction func share(_ sender: UIButton) {
+        let link = "https://www.reddit.com/r/\(subreddit)/top/\(id)"
+        
+        let linkToShare = [link]
+        let activityViewController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self
+      //  self.present
+    }
     func configure(for data: Post){
-    
-        let now = Int(NSDate().timeIntervalSince1970)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.imgView.isUserInteractionEnabled = true
+              tapGestureRecognizer.numberOfTouchesRequired = 1
+        self.imgView.addGestureRecognizer(tapGestureRecognizer)
+        
+    let now = Int(NSDate().timeIntervalSince1970)
         let difference = now - data.created_utc
                             var time:String
                             
@@ -54,7 +69,7 @@ class PostTableViewCell: UITableViewCell {
                             default:
                                 time = "\(Int(difference/31536000))y"
                             }
-        
+        id = data.id
        self.authorL.text = (data.author)
         self.timeL.text = time
         self.domainL.text = data.domain
@@ -62,7 +77,7 @@ class PostTableViewCell: UITableViewCell {
         self.ratingL.text = String((data.ups )-(data.downs ))
         self.numcommentsL.text = String(data.num_comments )
         self.imgView.sd_setImage(with: URL(string:data.url ), placeholderImage: UIImage())
-       
+        
         
     }
     
