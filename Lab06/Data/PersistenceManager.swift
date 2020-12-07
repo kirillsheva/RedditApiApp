@@ -18,8 +18,10 @@ class PersistenceManager {
     
     var saved:Array<Post> = []
     var info:Array<Post> = []
-
-  
+    var comments:Array<PostComment> = []
+    func addComment(_ post: PostComment){
+        comments.append(post)
+    }
     func add (post : Post){
         info.append(post)
      //   print(PersistenceManager.shared.fetch())

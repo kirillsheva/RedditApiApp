@@ -25,7 +25,7 @@ class HTTPService{
     }
     
     
-  
+
     
 
     static func requestService(subreddit: String,listing: String, limit: Int?, after: String?){
@@ -49,4 +49,5 @@ class HTTPService{
 
     
 }
+  
 }

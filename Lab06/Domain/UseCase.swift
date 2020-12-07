@@ -16,6 +16,8 @@ class UseCase{
      
     }
     
+   
+    
   
     
     func getData() -> Array<Post>{

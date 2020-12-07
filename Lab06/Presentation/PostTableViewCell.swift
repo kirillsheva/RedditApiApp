@@ -11,7 +11,7 @@ import SDWebImage
 class PostTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "postCell"
-    
+    var permalink: String = ""
    var id:String = ""
     @IBOutlet weak var authorL:UILabel!
      @IBOutlet weak var timeL:UILabel!
@@ -32,7 +32,8 @@ class PostTableViewCell: UITableViewCell {
         self.ratingL.text = nil
         self.titleL.text = nil
         self.imgView.image = nil
-     
+        self.id = ""
+        self.permalink = ""
     }
       @objc
       func handleTap(){
@@ -70,7 +71,8 @@ class PostTableViewCell: UITableViewCell {
                                 time = "\(Int(difference/31536000))y"
                             }
         id = data.id
-       self.authorL.text = (data.author)
+        permalink = data.permalink
+        self.authorL?.text = (data.author)
         self.timeL.text = time
         self.domainL.text = data.domain
         self.titleL.text = data.title

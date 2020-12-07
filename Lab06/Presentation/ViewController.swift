@@ -12,6 +12,7 @@ import SDWebImage
 class ViewController: UIViewController {
     var id:String = ""
     var permalink: String = ""
+    var comments = [String?]()
     @IBOutlet weak var authorL:UILabel!
      @IBOutlet weak var timeL:UILabel!
      @IBOutlet weak var domainL:UILabel!
@@ -87,8 +88,9 @@ class ViewController: UIViewController {
                        self.numcommentsL?.text = String(data.num_comments )
             self.imgView.sd_setImage(with: URL(string:data.url ), placeholderImage: UIImage())
             self.saveB?.isSelected = data.isSaved
-        }
-
+            CommentService.commentService(self.permalink)
+    
+}
 }
 }
 

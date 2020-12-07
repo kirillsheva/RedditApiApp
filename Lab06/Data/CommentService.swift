@@ -8,25 +8,80 @@
 
 import Foundation
 
+struct Comments : Codable{
+    var data: PostComments
+    struct PostComments : Codable {
+        var children : [Child]
+        struct Child : Codable {
+            var data: Post
+            struct Post : Codable {
+                var permalink : String?
+                var author : String?
+                var created_utc:Int?
+                var body : String?
+                var ups : Int?
+                var downs : Int?
+            }
+        }
+    }
+}
+
+struct PostComment : Codable {
+               var permalink : String?
+               var author : String?
+               var created_utc:Int?
+               var body : String?
+               var ups : Int?
+               var downs : Int?
+    init(_ post: Comments.PostComments.Child.Post) {
+        self.permalink = post.permalink
+        self.author = post.author
+        self.created_utc = (post.created_utc)
+        self.body = post.body
+        self.ups = post.ups
+        self.downs = post.downs
+            
+                
+         
+           }           }
+
 class CommentService{
     
-    func loadComments(_ permalink: String, completion: @escaping ([Comments.PostComments.Child])->Void){
-        guard let url = URL(string: jsonURL(permalink)) else {return}
-        URLSession.shared.dataTask(with: url){(data,response,error) in
-            guard let data = data else {return}
-            do{
-                let obj = try JSONDecoder().decode([Comments].self,from: data)
-                for element in obj {
-                    let commentChild = element.data.children
-                    completion(commentChild)
+    static func commentService(_ permalink: String){
+        HTTPRequester.request(url: jsonURL(permalink), completionHandler:{ data in
+                if let data = data{
+                    print(data)
+                    if let info = getComments(res:data){
+                        for element in info{
+                            for post in element.data.children{
+                                PersistenceManager.shared.addComment(PostComment(post.data))
+                                print(post.data)
+                            }
+                        }
+                        
+                    }
+                }else{
+                    print("Comment Service error")
                 }
-            }catch{
-                print("Error")
-            }
-        }.resume()
+                    
+                
+    })
+
+        
+    }
+  static func getComments(res:Data)->[Comments]?{
+        do{
+            let objs = try JSONDecoder().decode([Comments].self, from: res)
+            return objs
+        } catch{
+            print("Asshole")
+            return nil
+        }
+    
     }
     
-    func jsonURL(_ permalink:String) -> String {
+  
+    static func jsonURL(_ permalink:String) -> String {
         let url = "https://www.reddit.com"+permalink+".json"
         return url
     }

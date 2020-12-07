@@ -32,24 +32,7 @@ struct Response : Codable{
     }
 }
 
-struct Comments : Codable{
-    var data: PostComments
-    struct PostComments : Codable {
-        var children : [Child]
-        struct Child : Codable {
-            var data: Post
-            struct Post : Codable {
-                var title: String
-                var permalink : String
-                var author : String
-                var created_utc:Int
-                var body : String
-                var ups : Int
-                var downs : Int
-            }
-        }
-    }
-}
+
 
 
 
@@ -95,16 +78,7 @@ struct Post:Codable{
                   }
            }*/
 class Repository{
-    static func parse(data:Data) -> Post?{
-        do{
-            let result = try JSONDecoder().decode(Post.self, from: data)
-            return result
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-        
-    }
+   
     
     func saveToJsonFile(arr : Array<Post>) {
      guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }

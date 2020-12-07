@@ -12,12 +12,18 @@ class HTTPRequester{
     
  static func request(url: String, completionHandler : @escaping (Data?) -> Void){
         guard let link = URL(string: url) else {
-            return }
+            return print("Wrong url")}
+ 
         let task = URLSession.shared.dataTask(with: link) { (data, response, error) in
             if let data = data{
                 completionHandler(data)
             }
+            if let error = error{
+                print(error)
+            }
         }
+    
     task.resume()
     }
+
 }

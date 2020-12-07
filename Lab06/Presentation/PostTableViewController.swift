@@ -12,35 +12,71 @@ let notify = Notification.Name("123")
  let toNextScreenIdentifier = "toNextScreen"
 var val = 5
 
-class PostTableViewController: UITableViewController {
 
+class PostTableViewController: UITableViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var text : UITextField!
+   
     var posts: Array<Post> = []
     var savedPosts: Array<Post> = []
-  
+    var filteredPosts: Array<Post> = []
+    var comments = [String?]()
     var filter: UIButton = UIButton()
-    
+  
     override func viewDidLoad() {
         UseCase().request()
         super.viewDidLoad()
+       self.text.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
+        text.delegate = self
         self.title = "/r/\(subreddit)"
         //    self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.text)
         self.filter.setImage(UIImage(systemName: "bookmark"), for: .normal)
         self.filter.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
         self.filter.addTarget(self, action: #selector(self.showsub), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.filter)
+             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.filter)
           self.filter.tintColor = UIColor.systemGreen
         //   print(PersistenceManager.shared.getDirectory())
       //  print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
        NotificationCenter.default.addObserver(self, selector: #selector(loadPosts), name: notify, object: nil)
+       
+   
+        //print(comments)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text {
+            filter(text+string)
+        }
+        return true
+    }
+    
+    func filter(_ query : String){
+        filteredPosts.removeAll()
+        for data in savedPosts{
+                if data.title.lowercased().starts(with: query.lowercased()){
+            filteredPosts.append(data)
+            }
+        }
+
+            tableView.reloadData()
     }
     
     
     @objc
     func showsub(){
         filter.isSelected = !filter.isSelected
+      
+        text.isHidden = false
         loadSaved()
+        
+       DispatchQueue.main.async {
+             self.tableView.reloadData()
+         
+     }
+        
     }
   
     func loadSaved(){
@@ -75,11 +111,16 @@ class PostTableViewController: UITableViewController {
             i+=1
         }
         DispatchQueue.main.async {
-          
+           
             self.tableView.reloadData()
         
     }
     }
+    
+    
+    
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,9 +131,17 @@ class PostTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if filter.isSelected{
+             if !filteredPosts.isEmpty{
+                           return filteredPosts.count
+                          
+             } else{
+            
             return savedPosts.count
+            }
         }
+           
         else{
+            text.isHidden = true
         return posts.count
             
         }
@@ -101,8 +150,13 @@ class PostTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath) as! PostTableViewCell
+       
         if filter.isSelected{
             cell.configure(for: savedPosts[indexPath.row])
+             if !filteredPosts.isEmpty{
+                cell.configure(for: filteredPosts[indexPath.row])
+                   }
+            
         } else{
         cell.configure(for: posts[indexPath.row] )
         }
@@ -175,6 +229,9 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
                 let info = segue.destination as! ViewController
             if (filter.isSelected){
                 info.normalize(data: savedPosts[indexPath])
+                if (!filteredPosts.isEmpty){
+                    info.normalize(data: filteredPosts[indexPath])
+                }
             } else{
             info.normalize(data: posts[indexPath])
             }
