@@ -65,6 +65,8 @@ class CommentService{
                              //   print(post.data)
                             }
                         }
+                        PersistenceManager.shared.comments.remove(at: 0)
+                        PersistenceManager.shared.comments.removeLast()
                           NotificationCenter.default.post(Notification(name: commentsSaved))
                         
                     }

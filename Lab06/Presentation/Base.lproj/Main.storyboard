@@ -179,7 +179,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcQ-LR-BnE">
-                                <rect key="frame" x="0.0" y="324" width="414" height="302"/>
+                                <rect key="frame" x="0.0" y="368" width="414" height="302"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aiQ-gG-CE0">
                                         <rect key="frame" x="0.0" y="108" width="414" height="150"/>
@@ -294,7 +294,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VZd-hk-hhu">
-                                <rect key="frame" x="0.0" y="634" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="678" width="414" height="172"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
@@ -306,6 +306,7 @@
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="f9t-r8-P8N"/>
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="mel-54-mNh"/>
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pzI-yS-681"/>
+                            <constraint firstItem="rcQ-LR-BnE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="280" id="uOj-Rj-siC"/>
                             <constraint firstItem="VZd-hk-hhu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xTY-4v-7Vb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VZd-hk-hhu" secondAttribute="bottom" constant="100" id="yKM-rI-Nxu"/>
                         </constraints>
