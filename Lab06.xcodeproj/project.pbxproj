@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE18D4A3257FF6A100656885 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18D4A2257FF6A100656885 /* CommentView.swift */; };
+		CE307BAD257EEE1D005B16AA /* CommentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE307BAC257EEE1D005B16AA /* CommentList.swift */; };
 		CE72A526257ABA8D002E6288 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72A525257ABA8D002E6288 /* CommentService.swift */; };
 		CE7DE566254F113F006346A0 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE565254F113F006346A0 /* HTTPService.swift */; };
 		CE7DE568254F114E006346A0 /* HTTPRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE567254F114E006346A0 /* HTTPRequester.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE18D4A2257FF6A100656885 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		CE307BAC257EEE1D005B16AA /* CommentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentList.swift; sourceTree = "<group>"; };
 		CE72A525257ABA8D002E6288 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		CE7DE565254F113F006346A0 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		CE7DE567254F114E006346A0 /* HTTPRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequester.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 				CEC0F89C254ED72200EF4887 /* SceneDelegate.swift */,
 				CEC03AB0256D58080025C7C1 /* PostTableViewCell.swift */,
 				CEC03AB2256D58210025C7C1 /* PostTableViewController.swift */,
+				CE307BAC257EEE1D005B16AA /* CommentList.swift */,
+				CE18D4A2257FF6A100656885 /* CommentView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -198,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7DE568254F114E006346A0 /* HTTPRequester.swift in Sources */,
+				CE18D4A3257FF6A100656885 /* CommentView.swift in Sources */,
 				CE7DE56E254F117F006346A0 /* UseCase.swift in Sources */,
 				CE7DE56C254F116D006346A0 /* PersistenceManager.swift in Sources */,
 				CEC0F89F254ED72200EF4887 /* ViewController.swift in Sources */,
@@ -208,6 +215,7 @@
 				CE72A526257ABA8D002E6288 /* CommentService.swift in Sources */,
 				CE7DE56A254F115E006346A0 /* Repository.swift in Sources */,
 				CEC03AB1256D58080025C7C1 /* PostTableViewCell.swift in Sources */,
+				CE307BAD257EEE1D005B16AA /* CommentList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

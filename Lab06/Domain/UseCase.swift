@@ -19,7 +19,9 @@ class UseCase{
    
     
   
-    
+    func getComments() ->Array<PostComment>{
+        PersistenceManager.shared.getComments()
+    }
     func getData() -> Array<Post>{
         PersistenceManager.shared.getInfo()
     }

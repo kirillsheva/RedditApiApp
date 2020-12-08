@@ -293,13 +293,21 @@
                                     <constraint firstItem="aiQ-gG-CE0" firstAttribute="top" secondItem="1Px-T3-K0s" secondAttribute="bottom" constant="2" id="y9V-3b-zx6"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VZd-hk-hhu">
+                                <rect key="frame" x="0.0" y="634" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="VZd-hk-hhu" firstAttribute="top" secondItem="rcQ-LR-BnE" secondAttribute="bottom" constant="8" id="F4p-jS-fXc"/>
+                            <constraint firstItem="VZd-hk-hhu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="LGZ-x6-hAf"/>
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="N5s-1E-nKX"/>
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="f9t-r8-P8N"/>
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="mel-54-mNh"/>
                             <constraint firstItem="rcQ-LR-BnE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pzI-yS-681"/>
+                            <constraint firstItem="VZd-hk-hhu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xTY-4v-7Vb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VZd-hk-hhu" secondAttribute="bottom" constant="100" id="yKM-rI-Nxu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

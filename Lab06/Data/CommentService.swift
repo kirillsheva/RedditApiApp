@@ -15,6 +15,7 @@ struct Comments : Codable{
         struct Child : Codable {
             var data: Post
             struct Post : Codable {
+                var id: String?
                 var permalink : String?
                 var author : String?
                 var created_utc:Int?
@@ -26,24 +27,28 @@ struct Comments : Codable{
     }
 }
 
-struct PostComment : Codable {
+struct PostComment:Identifiable, Codable {
+                var id : String?
                var permalink : String?
                var author : String?
                var created_utc:Int?
                var body : String?
                var ups : Int?
                var downs : Int?
+    
+    
     init(_ post: Comments.PostComments.Child.Post) {
-        self.permalink = post.permalink
-        self.author = post.author
-        self.created_utc = (post.created_utc)
-        self.body = post.body
-        self.ups = post.ups
-        self.downs = post.downs
-            
-                
-         
-           }           }
+    self.id = post.id
+      self.permalink = post.permalink
+      self.author = post.author
+      self.created_utc = (post.created_utc)
+      self.body = post.body
+      self.ups = post.ups
+      self.downs = post.downs
+
+         }
+    
+}
 
 class CommentService{
     
@@ -52,12 +57,15 @@ class CommentService{
                 if let data = data{
                     print(data)
                     if let info = getComments(res:data){
+                        PersistenceManager.shared.clear()
                         for element in info{
                             for post in element.data.children{
+                                
                                 PersistenceManager.shared.addComment(PostComment(post.data))
-                                print(post.data)
+                             //   print(post.data)
                             }
                         }
+                          NotificationCenter.default.post(Notification(name: commentsSaved))
                         
                     }
                 }else{

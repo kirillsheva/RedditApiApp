@@ -37,7 +37,7 @@ struct Response : Codable{
 
 
 struct Post:Codable{
-    var id:String
+           var id:String
            var author:String
            var domain:String
            var created_utc:Int

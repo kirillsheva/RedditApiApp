@@ -18,9 +18,12 @@ class PersistenceManager {
     
     var saved:Array<Post> = []
     var info:Array<Post> = []
-    var comments:Array<PostComment> = []
+   @Published var comments:Array<PostComment> = []
     func addComment(_ post: PostComment){
         comments.append(post)
+    }
+    func clear(){
+        comments.removeAll()
     }
     func add (post : Post){
         info.append(post)
@@ -66,7 +69,9 @@ func save (id:String){
     func getSaved()->Array<Post>{
         return saved
     }
-    
+    func getComments()->Array<PostComment>{
+        return comments
+    }
     
     func getDirectory() -> URL{
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first

@@ -80,7 +80,6 @@ class PostTableViewCell: UITableViewCell {
         self.numcommentsL.text = String(data.num_comments )
         self.imgView.sd_setImage(with: URL(string:data.url ), placeholderImage: UIImage())
         
-        
     }
     
     

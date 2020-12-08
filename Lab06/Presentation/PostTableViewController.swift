@@ -9,6 +9,7 @@
 import UIKit
 
 let notify = Notification.Name("123")
+let commentsSaved = Notification.Name("321")
  let toNextScreenIdentifier = "toNextScreen"
 var val = 5
 

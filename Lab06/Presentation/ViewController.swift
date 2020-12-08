@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SwiftUI
 import SDWebImage
 
 class ViewController: UIViewController {
     var id:String = ""
-    var permalink: String = ""
-    var comments = [String?]()
+    var link: String = ""
+    var comments : [PostComment] = []
+      let content = UIHostingController(rootView: CommentList(comments: [PostComment]()))
     @IBOutlet weak var authorL:UILabel!
      @IBOutlet weak var timeL:UILabel!
      @IBOutlet weak var domainL:UILabel!
@@ -26,18 +28,44 @@ class ViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(loadComments), name: commentsSaved, object: nil)
         saveB.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         imgView.isUserInteractionEnabled = true
         tapGestureRecognizer.numberOfTapsRequired = 2
         imgView.addGestureRecognizer(tapGestureRecognizer)
+       
+         DispatchQueue.main.async {
+     self.addChild(self.content)
+     self.view.addSubview(self.content.view)
+     self.setup()
+ }    }
+    
+    @objc
+    func loadComments(){
+        DispatchQueue.main.async {
+            let info = UseCase().getComments()
+            print(info)
+            print("-----------------------------------------")
+            self.content.rootView.comments = info
+        }
+      
+    }
+    fileprivate func setup(){
+        self.content.view.translatesAutoresizingMaskIntoConstraints = false
+        self.content.view.topAnchor.constraint(equalTo: self.view.subviews[0].bottomAnchor).isActive = true
+        self.content.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive=true
+        self.content.view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        self.content.view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+       
     }
     
     @IBAction func share(_ sender: UIButton) {
-        let link = "https://www.reddit.com/\(permalink)"
+        let wlink = "https://www.reddit.com/\(link)"
              
-             let linkToShare = [link]
+             let linkToShare = [wlink]
              let activityViewController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
           //   activityViewController.popoverPresentationController?.sourceView = self.view
              self.present(activityViewController,animated: true,completion: nil)
@@ -78,7 +106,7 @@ class ViewController: UIViewController {
                                     default:
                                         time = "\(Int(difference/31536000))y"
                                     }
-            self.permalink = data.permalink
+            self.link = data.permalink
             self.id = data.id
                        self.authorL?.text = (data.author)
             self.timeL?.text = time
@@ -88,9 +116,9 @@ class ViewController: UIViewController {
                        self.numcommentsL?.text = String(data.num_comments )
             self.imgView.sd_setImage(with: URL(string:data.url ), placeholderImage: UIImage())
             self.saveB?.isSelected = data.isSaved
-            CommentService.commentService(self.permalink)
-    
+            CommentService.commentService(self.link)
 }
 }
+   
 }
 
