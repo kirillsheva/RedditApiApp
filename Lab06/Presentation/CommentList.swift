@@ -14,6 +14,7 @@ struct CommentList: View {
         List{
         ForEach(comments){el in
             CommentView(el: el)
+                
         }
                  
         
