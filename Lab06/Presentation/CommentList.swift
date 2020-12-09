@@ -15,11 +15,10 @@ struct CommentList: View {
         ForEach(comments){el in
             CommentView(el: el)
                 
-        }
-                 
-        
-                    }
-        
+               }
+
             }
-}
+        
+        }
+     }
 
