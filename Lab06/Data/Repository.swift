@@ -47,7 +47,8 @@ struct Post:Codable{
            var downs:Int
            var num_comments:Int
            var isSaved:Bool
-            var permalink:String
+           var permalink:String
+ 
     init(_ post: Response.DataStruct.ItemStruct.ItemDataStruct) {
         self.id=post.id
             self.author = post.author
@@ -63,20 +64,8 @@ struct Post:Codable{
         }
         
 }
-/*struct SavedResponse:Decodable {
-                  var data:[Post]
-                  struct Post:Decodable{
-                      var author:String
-                      var domain:String
-                      var created_utc:Int
-                      var title:String
-                      var url:String
-                      var ups:Int
-                      var downs:Int
-                      var num_comments:Int
-                      var isSaved:Bool
-                  }
-           }*/
+
+
 class Repository{
    
     
