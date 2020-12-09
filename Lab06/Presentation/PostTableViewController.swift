@@ -27,7 +27,7 @@ class PostTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         UseCase().request()
         super.viewDidLoad()
-       self.text.isHidden = true
+        self.text.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         text.delegate = self
@@ -37,14 +37,10 @@ class PostTableViewController: UITableViewController, UITextFieldDelegate {
         self.filter.setImage(UIImage(systemName: "bookmark"), for: .normal)
         self.filter.setImage(UIImage(systemName: "bookmark.fill"), for: .selected)
         self.filter.addTarget(self, action: #selector(self.showsub), for: .touchUpInside)
-             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.filter)
-          self.filter.tintColor = UIColor.systemGreen
-        //   print(PersistenceManager.shared.getDirectory())
-      //  print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.filter)
+        self.filter.tintColor = UIColor.systemGreen
        NotificationCenter.default.addObserver(self, selector: #selector(loadPosts), name: notify, object: nil)
-       
-   
-        //print(comments)
+
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -82,7 +78,6 @@ class PostTableViewController: UITableViewController, UITextFieldDelegate {
   
     func loadSaved(){
         if let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Info.json"){
-   //         let items = try FileManager.default.contentsOfDirectory(atPath: path)
             if  let data = try? Data(contentsOf: path, options: .alwaysMapped){
                         do{
                             savedPosts = try JSONDecoder().decode([Post].self, from: data)
