@@ -51,13 +51,11 @@ class PostTableViewCell: UITableViewCell {
     func configure(for data: Post){
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.imgView.isUserInteractionEnabled = true
-              tapGestureRecognizer.numberOfTouchesRequired = 1
-        self.imgView.addGestureRecognizer(tapGestureRecognizer)
-        
-    let now = Int(NSDate().timeIntervalSince1970)
+        tapGestureRecognizer.numberOfTouchesRequired = 1
+        self.imgView.addGestureRecognizer(tapGestureRecognizer)        
+        let now = Int(NSDate().timeIntervalSince1970)
         let difference = now - data.created_utc
-                            var time:String
-                            
+        var time:String
                             switch difference{
                             case let diff where diff < 3600:
                                 time = "\(Int(diff/60))m"
