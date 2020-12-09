@@ -18,7 +18,7 @@ class PersistenceManager {
     
     var saved:Array<Post> = []
     var info:Array<Post> = []
-   @Published var comments:Array<PostComment> = []
+    @Published var comments:Array<PostComment> = []
     func addComment(_ post: PostComment){
         comments.append(post)
     }
@@ -27,7 +27,6 @@ class PersistenceManager {
     }
     func add (post : Post){
         info.append(post)
-     //   print(PersistenceManager.shared.fetch())
     }
     
     func remove(id:String){
@@ -49,16 +48,9 @@ func save (id:String){
         if info[element].id == id {
             info[element].isSaved = true
             saved.append(info[element])
-     
-          
-            
-          //  print(saved[element])
-
-        }
-        
+        } 
     }
-   // print(getDirectory() )
-     savePosts(resp: saved)
+    savePosts(resp: saved)
     print(saved)
     NotificationCenter.default.post(Notification(name: notify))
 }
