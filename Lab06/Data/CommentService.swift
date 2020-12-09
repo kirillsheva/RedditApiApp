@@ -60,9 +60,7 @@ class CommentService{
                         PersistenceManager.shared.clear()
                         for element in info{
                             for post in element.data.children{
-                                
                                 PersistenceManager.shared.addComment(PostComment(post.data))
-                             //   print(post.data)
                             }
                         }
                         PersistenceManager.shared.comments.remove(at: 0)
@@ -72,19 +70,16 @@ class CommentService{
                     }
                 }else{
                     print("Comment Service error")
-                }
-                    
-                
-    })
-
-        
-    }
+                }       
+    })      
+  }
+    
   static func getComments(res:Data)->[Comments]?{
         do{
             let objs = try JSONDecoder().decode([Comments].self, from: res)
             return objs
         } catch{
-            print("Asshole")
+            print("GetCommentsError")
             return nil
         }
     
